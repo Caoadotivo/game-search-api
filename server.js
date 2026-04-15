@@ -1,6 +1,6 @@
 // server.js
 const express = require("express");
-const fetch = require("node-fetch");
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const cors = require("cors");
 
 
@@ -107,3 +107,7 @@ app.post("/details", async (req, res) => {
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log("Rodando"));
+
+app.get("/", (req, res) => {
+  res.send("API rodando 🚀");
+});
